@@ -3,7 +3,7 @@
 
 - 🌱 I’m currently learning **React, Nextjs**
 
-- 👨‍💻 All of my projects are available at [www.omghante.com](www.omghante.com)
+- 👨‍💻 All of my projects are available at [https://www.omghante.com](https://www.omghante.com)
 
 - 💬 Ask me about **Android or Web Dev**
 
