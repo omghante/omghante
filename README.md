@@ -1,3 +1,4 @@
+[![MasterHead](./om-deepak-ghante/src/img/readmebanner.jpg)](https://www.omghante.com)
 <h1 align="center">Hi 👋, I'm Om Deepak Ghante</h1>
 <h3 align="center">A passionate Fullstack developer from India</h3>
 
