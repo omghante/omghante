@@ -2,205 +2,109 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Link2, Code, Smartphone, Brain, Package, ChevronDown, ChevronUp, ArrowUpRight, Folder } from "lucide-react";
-
+import Link from "next/link";
+import { ArrowUpRight, Github } from "lucide-react";
 import content from "../data/content.json";
 
-interface Project {
-    id: number;
-    title: string;
-    description: string;
-    category: "website" | "mobile" | "ai" | "library";
-    techStack: string[];
-    imageUrl: string;
-    demoUrl: string;
-    repoUrl: string;
-}
-
-const projects = content.projects.items as unknown as Project[];
-
-const Projects = () => {
-    const [activeTab, setActiveTab] = useState<
-        "website" | "mobile" | "ai" | "library"
-    >("website");
-    const [currentPage, setCurrentPage] = useState(1);
-    const [hoveredProject, setHoveredProject] = useState<Project | null>(null);
-
-    const ITEMS_PER_PAGE = 4;
-
-    const filteredProjects = projects.filter((p) => p.category === activeTab);
-    const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
-
-    const visibleProjects = filteredProjects.slice(
-        (currentPage - 1) * ITEMS_PER_PAGE,
-        currentPage * ITEMS_PER_PAGE
-    );
-
-    // Default to the first project in the list for the preview if none hovered
-    const activePreview = hoveredProject || visibleProjects[0];
-
-    const tabIcons: Record<string, any> = {
-        website: Code,
-        mobile: Smartphone,
-        ai: Brain,
-        library: Package
-    };
+export default function Projects() {
+    const { projects } = content;
+    const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
     return (
-        <section className="flex min-h-screen w-full flex-col justify-center py-20 text-gray-900">
-            {/* Title Banner */}
-            <div className="w-full bg-white py-4 mb-12">
-                <div className="mx-auto w-full max-w-7xl px-6 md:px-12 lg:px-24">
-                    <h2 className="text-center text-4xl font-bold tracking-tight sm:text-5xl text-gray-900 flex items-center justify-center gap-4">
-                        <span className="relative flex h-3 w-3">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-30"></span>
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-600 shadow-[0_0_8px_rgba(2,132,199,0.6)]"></span>
-                        </span>
-                        {content.projects.title}
-                    </h2>
-                </div>
-            </div>
+        <section id="projects" className="w-full bg-surface py-32 border-t border-border/40">
+            <div className="container-max mx-auto px-6 lg:px-0">
+                <h2 className="mb-20 font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">
+                    Selected Works
+                </h2>
 
-            <div className="mx-auto w-full max-w-7xl px-6 md:px-12 lg:px-24">
-                {/* Tabs */}
-                <div className="mb-16 flex flex-wrap justify-center gap-4">
-                    {content.projects.tabs.map((tab) => {
-                        const Icon = tabIcons[tab.id];
-                        return (
-                            <button
-                                key={tab.id}
-                                onClick={() => {
-                                    setActiveTab(tab.id as any);
-                                    setCurrentPage(1);
-                                    setHoveredProject(null);
-                                }}
-                                className={`flex items-center gap-2 rounded-lg px-5 py-2 text-sm font-medium transition-colors ${activeTab === tab.id
-                                    ? "bg-black text-white"
-                                    : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
-                                    }`}
-                            >
-                                <Icon size={16} strokeWidth={1.5} className={activeTab === tab.id ? "text-sky-400" : "text-sky-600"} />
-                                {tab.label}
-                            </button>
-                        );
-                    })}
-                </div>
+                <div className="flex flex-col gap-32">
+                    {projects.items.map((project, index) => (
+                        <div
+                            key={project.id}
+                            className={`group flex flex-col gap-12 lg:gap-24 items-center ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                                }`}
+                            onMouseEnter={() => setHoveredProject(project.id)}
+                            onMouseLeave={() => setHoveredProject(null)}
+                        >
+                            {/* Project Image - Large & Immersive */}
+                            <div className="w-full lg:w-3/5">
+                                <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-surface-raised shadow-sm transition-all duration-700 ease-out group-hover:shadow-2xl group-hover:shadow-accent/5 ring-1 ring-border group-hover:ring-accent/20">
+                                    <Image
+                                        src={project.imageUrl}
+                                        alt={project.title}
+                                        fill
+                                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                                    />
 
-                {/* Interactive List Layout */}
-                <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-                    {/* List Column */}
-                    <div className="flex flex-col">
-                        <div className="flex flex-col min-h-[350px]">
-                            {visibleProjects.map((project) => (
-                                <div
-                                    key={project.id}
-                                    onMouseEnter={() => setHoveredProject(project)}
-                                    className={`group relative flex cursor-pointer items-center justify-between border-b border-gray-100 py-6 px-4 transition-all hover:bg-transparent`}
-                                >
-                                    <div className="flex items-center gap-4">
-                                        <Folder
-                                            size={20}
-                                            strokeWidth={1.5}
-                                            className={`transition-colors group-hover:text-gray-400 ${(hoveredProject?.id === project.id || (!hoveredProject && activePreview?.id === project.id)) ? "text-sky-600" : "text-sky-600"
-                                                }`}
-                                        />
-                                        <h3 className={`text-xl font-bold transition-colors group-hover:text-gray-400 ${(hoveredProject?.id === project.id || (!hoveredProject && activePreview?.id === project.id)) ? "text-black" : "text-black"
-                                            }`}>
+                                    {/* Overlay Action */}
+                                    <div className="absolute inset-0 bg-ink/0 transition-colors duration-500 group-hover:bg-ink/5 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                        {project.demoUrl && project.demoUrl !== "#" && (
+                                            <Link
+                                                href={project.demoUrl}
+                                                target="_blank"
+                                                className="bg-surface-raised text-ink px-6 py-3 rounded-full font-medium shadow-xl translate-y-4 transition-transform duration-500 group-hover:translate-y-0 flex items-center gap-2"
+                                            >
+                                                Visit Live Site <ArrowUpRight size={16} />
+                                            </Link>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Project Info - Minimal & Typography Driven */}
+                            <div className="w-full lg:w-2/5 flex flex-col items-start">
+                                <div className="flex flex-col gap-6">
+                                    <div className="flex flex-col gap-2">
+                                        <span className="font-mono text-xs font-bold text-accent uppercase tracking-widest">
+                                            0{index + 1} — {project.category || "Development"}
+                                        </span>
+                                        <h3 className="font-display text-4xl font-bold text-ink leading-tight">
                                             {project.title}
                                         </h3>
                                     </div>
-                                    <ArrowUpRight
-                                        size={20}
-                                        className={`transition-transform duration-300 group-hover:text-gray-400 group-hover:-translate-y-1 group-hover:translate-x-1 ${(hoveredProject?.id === project.id || (!hoveredProject && activePreview?.id === project.id))
-                                            ? "text-sky-600"
-                                            : "text-sky-600"
-                                            }`}
-                                    />
+
+                                    <p className="text-lg text-ink-muted leading-relaxed font-light">
+                                        {project.description}
+                                    </p>
+
+                                    {/* Proof Metric */}
+                                    {project.outcome && (
+                                        <div className="py-4 border-y border-border/60 w-full my-2">
+                                            <p className="font-mono text-sm text-ink font-medium">
+                                                <span className="text-accent mr-2">/</span>
+                                                {project.outcome}
+                                            </p>
+                                        </div>
+                                    )}
+
+                                    {/* Tech Stack - Text Based */}
+                                    <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-mono text-ink-subtle">
+                                        {project.techStack.map((tech) => (
+                                            <span key={tech}>
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    {/* Links */}
+                                    <div className="flex gap-8 pt-4">
+                                        {project.demoUrl && project.demoUrl !== "#" && (
+                                            <Link href={project.demoUrl} target="_blank" className="text-ink font-medium hover:text-accent transition-colors flex items-center gap-2 group/link">
+                                                View Project <ArrowUpRight className="transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" size={18} />
+                                            </Link>
+                                        )}
+                                        {project.repoUrl && project.repoUrl !== "#" && (
+                                            <Link href={project.repoUrl} target="_blank" className="text-ink-muted hover:text-ink transition-colors flex items-center gap-2">
+                                                Source Code <Github size={18} />
+                                            </Link>
+                                        )}
+                                    </div>
                                 </div>
-                            ))}
-                        </div>
-
-                        {/* Pagination Controls */}
-                        {totalPages > 1 && (
-                            <div className="flex justify-center items-center gap-4">
-                                <button
-                                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                                    disabled={currentPage === 1}
-                                    className={`p-2 rounded-full transition-colors ${currentPage === 1
-                                        ? "text-gray-300 cursor-not-allowed"
-                                        : "text-gray-600 hover:bg-gray-100 hover:text-black"
-                                        }`}
-                                >
-                                    <ChevronUp size={20} className="-rotate-90" />
-                                </button>
-
-                                <span className="text-sm font-medium text-gray-600">
-                                    Page {currentPage} of {totalPages}
-                                </span>
-
-                                <button
-                                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                                    disabled={currentPage === totalPages}
-                                    className={`p-2 rounded-full transition-colors ${currentPage === totalPages
-                                        ? "text-gray-300 cursor-not-allowed"
-                                        : "text-gray-600 hover:bg-gray-100 hover:text-black"
-                                        }`}
-                                >
-                                    <ChevronDown size={20} className="-rotate-90" />
-                                </button>
                             </div>
-                        )}
-                    </div>
-
-                    {/* Preview Column (Sticky) */}
-                    <div className="hidden lg:block relative h-[600px] w-full">
-                        <div className="top-24 h-[500px] w-full overflow-hidden rounded-2xl border border-gray-200 bg-white flex flex-col">
-                            {activePreview && (
-                                <>
-                                    <div className="relative h-[60%] w-full bg-black">
-                                        <Image
-                                            src={activePreview.imageUrl}
-                                            alt={activePreview.title}
-                                            fill
-                                            className="object-contain p-8"
-                                            priority
-                                        />
-                                    </div>
-                                    <div className="flex-1 px-8 pt-4 pb-8 flex flex-col justify-between border-t border-gray-100">
-                                        <div>
-                                            <div className="flex items-center justify-between mb-2">
-                                                <h3 className="text-3xl font-bold text-black">{activePreview.title}</h3>
-                                                <div className="flex gap-2">
-                                                    {activePreview.techStack.slice(0, 3).map((tech) => (
-                                                        <span key={tech} className="bg-gray-100 text-gray-500 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-widest">{tech}</span>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                            <p className="text-gray-500 text-sm leading-relaxed mb-2">{activePreview.description}</p>
-                                        </div>
-                                        <div className="flex gap-4">
-                                            <a
-                                                href={activePreview.demoUrl}
-                                                className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-black py-2 text-sm font-bold text-white transition-opacity hover:opacity-80"
-                                            >
-                                                <Link2 size={18} strokeWidth={2} /> Live Demo
-                                            </a>
-                                            <a
-                                                href={activePreview.repoUrl}
-                                                className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-gray-200 py-2 text-sm font-bold text-gray-700 transition-colors hover:bg-gray-50"
-                                            >
-                                                <Code size={18} strokeWidth={2} /> View Code
-                                            </a>
-                                        </div>
-                                    </div>
-                                </>
-                            )}
                         </div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </section>
     );
-};
-
-export default Projects;
+}

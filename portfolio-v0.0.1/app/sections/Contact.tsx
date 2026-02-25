@@ -1,70 +1,66 @@
-"use client";
-
-import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 import Link from "next/link";
+import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 import content from "../data/content.json";
 
-const Contact = () => {
+export default function Contact() {
+    const { contact, hero } = content;
+    const currentYear = new Date().getFullYear();
+
     return (
-        <section className="flex min-h-screen w-full flex-col justify-center py-20 text-center">
-            {/* Title Banner */}
-            <div className="w-full bg-white py-4 mb-12">
-                <div className="mx-auto w-full max-w-4xl px-6 md:px-12 lg:px-24">
-                    <h2 className="text-center text-4xl font-bold tracking-tight md:text-5xl text-gray-900 flex items-center justify-center gap-4">
-                        <span className="relative flex h-3 w-3">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-30"></span>
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-600 shadow-[0_0_8px_rgba(2,132,199,0.6)]"></span>
-                        </span>
-                        {content.contact.title}
-                    </h2>
-                </div>
-            </div>
+        <footer id="contact" className="w-full border-t border-border bg-surface py-16">
+            <div className="container-max mx-auto flex flex-col items-start gap-12 px-6 lg:px-0">
+                <div className="flex w-full flex-col gap-6 md:flex-row md:justify-between md:items-start">
+                    <div className="flex flex-col gap-4 max-w-lg">
+                        <h2 className="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+                            {contact.title}
+                        </h2>
+                        <p className="text-lg text-ink-muted leading-relaxed">
+                            {contact.description}
+                        </p>
+                        <a
+                            href={`mailto:${contact.emailText}`}
+                            className="mt-2 inline-flex items-center text-lg font-medium text-accent hover:underline"
+                        >
+                            {contact.emailText}
+                        </a>
+                    </div>
 
-            <div className="mx-auto max-w-4xl px-6 md:px-12 lg:px-24">
-                <div className="flex flex-col items-center">
-                    <p className="mb-6 max-w-2xl text-center text-xl text-gray-600">
-                        {content.contact.description}
-                    </p>
-
-                    <Link
-                        href={content.hero.socialLinks.email}
-                        className="inline-flex items-center gap-2 rounded-full bg-black px-4 py-2 text-base font-bold text-white transition-transform hover:-translate-y-1"
-                    >
-                        <Mail size={16} strokeWidth={1.5} />
-                        {content.contact.emailText}
-                    </Link>
-
-                    {/* Social Links for easy access */}
-                    <div className="mt-8 flex justify-center gap-8 text-sky-600">
+                    <div className="flex gap-6 mt-8 md:mt-0">
                         <Link
-                            href={content.hero.socialLinks.github}
+                            href={hero.socialLinks.github}
                             target="_blank"
-                            className="transition-colors hover:text-black"
+                            rel="noopener noreferrer"
+                            className="text-ink-muted hover:text-ink transition-colors"
                             aria-label="GitHub"
                         >
-                            <Github size={20} strokeWidth={1.5} />
+                            <Github className="h-6 w-6" strokeWidth={1.5} />
                         </Link>
                         <Link
-                            href={content.hero.socialLinks.linkedin}
+                            href={hero.socialLinks.linkedin}
                             target="_blank"
-                            className="transition-colors hover:text-[#0077b5]"
+                            rel="noopener noreferrer"
+                            className="text-ink-muted hover:text-ink transition-colors"
                             aria-label="LinkedIn"
                         >
-                            <Linkedin size={20} strokeWidth={1.5} />
+                            <Linkedin className="h-6 w-6" strokeWidth={1.5} />
                         </Link>
                         <Link
-                            href={content.hero.socialLinks.twitter}
+                            href={hero.socialLinks.twitter}
                             target="_blank"
-                            className="transition-colors hover:text-black"
+                            rel="noopener noreferrer"
+                            className="text-ink-muted hover:text-ink transition-colors"
                             aria-label="Twitter"
                         >
-                            <Twitter size={20} strokeWidth={1.5} />
+                            <Twitter className="h-6 w-6" strokeWidth={1.5} />
                         </Link>
                     </div>
                 </div>
-            </div>
-        </section>
-    );
-};
 
-export default Contact;
+                <div className="mt-12 w-full border-t border-border/40 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-ink-subtle">
+                    <p>© {currentYear} Om Ghante. All rights reserved.</p>
+                    <p className="font-mono text-xs uppercase tracking-widest">Designed & Engineered by Om Ghante</p>
+                </div>
+            </div>
+        </footer>
+    );
+}
