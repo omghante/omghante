@@ -56,7 +56,7 @@ export default function Projects() {
                                 <div className="flex flex-col gap-6">
                                     <div className="flex flex-col gap-2">
                                         <span className="font-mono text-xs font-bold text-accent uppercase tracking-widest">
-                                            0{index + 1} — {project.category || "Development"}
+                                            0{index + 1} — Development
                                         </span>
                                         <h3 className="font-display text-4xl font-bold text-ink leading-tight">
                                             {project.title}
