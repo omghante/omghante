@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Folder, FileText, ChevronRight, ArrowLeft, Loader2, AlertCircle } from 'lucide-react';
+import MermaidDiagram from './MermaidDiagram';
 
 interface RepoViewerProps {
     owner: string;
@@ -129,6 +130,13 @@ export default function RepoViewer({ owner, repo, initialPath = '' }: RepoViewer
                                 components={{
                                     code({ node, inline, className, children, ...props }: any) {
                                         const match = /language-(\w+)/.exec(className || '')
+                                        const codeString = String(children).replace(/\n$/, '');
+
+                                        // Render Mermaid diagrams
+                                        if (!inline && match && match[1] === 'mermaid') {
+                                            return <MermaidDiagram chart={codeString} />;
+                                        }
+
                                         return !inline && match ? (
                                             <SyntaxHighlighter
                                                 style={vscDarkPlus}
@@ -136,7 +144,7 @@ export default function RepoViewer({ owner, repo, initialPath = '' }: RepoViewer
                                                 PreTag="div"
                                                 {...props}
                                             >
-                                                {String(children).replace(/\n$/, '')}
+                                                {codeString}
                                             </SyntaxHighlighter>
                                         ) : (
                                             <code className={className} {...props}>
