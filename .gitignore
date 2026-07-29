@@ -1,4 +1,46 @@
+# Dependencies
+node_modules/
+node_modules
+.pnp
+.pnp.js
 
+# Next.js build output
+.next/
+.next
+out/
+build/
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment variables
+.env
+.env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+
+# OS metadata & Editors
+.DS_Store
+*.pem
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # Git Context profile data
 .gitcontext/
