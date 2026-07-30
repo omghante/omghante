@@ -20,12 +20,13 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
             const match = /language-(\w+)/.exec(className || '');
             const language = match ? match[1] : '';
             const codeString = String(children).replace(/\n$/, '');
+            const isBlock = !inline || codeString.includes('\n');
 
             if (language === 'mermaid') {
               return <MermaidDiagram chart={codeString} />;
             }
 
-            if (!inline) {
+            if (isBlock) {
               return (
                 <div className="relative group my-6 overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 shadow-lg">
                   {language && (
@@ -49,6 +50,13 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
               >
                 {children}
               </code>
+            );
+          },
+          p({ children, ...props }: any) {
+            return (
+              <div className="my-4 leading-relaxed text-zinc-800" {...props}>
+                {children}
+              </div>
             );
           },
           pre({ children }: any) {

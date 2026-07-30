@@ -14,10 +14,10 @@ export default function DocsHubPage() {
   const documentedProjects = [
     {
       name: 'Meta Pilot',
-      slug: 'meta-pilot',
-      firstDoc: 'getting-started',
-      repoUrl: 'https://github.com/om-ghante/meta-pilot',
-      description: 'Enterprise Meta Graph API microservices integration engine specifications and deployment setup.',
+      slug: 'metapilot',
+      firstDoc: 'portal-readme',
+      repoUrl: 'https://github.com/omghante/metapilot',
+      description: 'Enterprise Meta Graph API microservices integration engine (98 Documentation Pages Across 13 Categories).',
     },
     {
       name: 'Git Context',

@@ -16,6 +16,7 @@ export interface GitHubDoc {
   slug: string;
   title: string;
   description: string;
+  category?: string;
   order: number;
   repoUrl: string;
   rawUrl: string;
