@@ -59,8 +59,8 @@ export default async function BlogDetailPage(props: { params: Promise<{ slug: st
             {blog.title}
           </h1>
 
-          <div className="flex items-center justify-between pt-2 border-t border-zinc-100 text-xs text-zinc-500 font-mono">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 border-t border-zinc-100 text-xs text-zinc-500 font-mono">
+            <div className="flex flex-wrap items-center gap-3">
               <span className="flex items-center gap-1">
                 <User className="h-3.5 w-3.5 text-navy-900" /> {blog.author}
               </span>
@@ -78,7 +78,7 @@ export default async function BlogDetailPage(props: { params: Promise<{ slug: st
               href={blog.rawUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-zinc-950 flex items-center gap-1"
+              className="hover:text-zinc-950 flex items-center gap-1 self-start sm:self-auto"
             >
               <Github className="h-3.5 w-3.5" /> View Raw
             </a>

@@ -107,6 +107,17 @@ export async function getGitHubBlogBySlug(slug: string): Promise<GitHubBlog | nu
 export async function getGitHubPullRequests(): Promise<GitHubContribution[]> {
   return [
     {
+      id: 116,
+      title: 'feat: add opus audio format support with centralized validation for TTS and music commands',
+      repo: 'MiniMax-AI/cli',
+      repoUrl: 'https://github.com/MiniMax-AI/cli',
+      prUrl: 'https://github.com/MiniMax-AI/cli/pull/116',
+      state: 'closed',
+      createdAt: '2026-05-11',
+      isUpstream: true,
+      tags: ['MiniMax CLI', 'Supersedes', 'Opus Audio', 'TTS & Music'],
+    },
+    {
       id: 51236,
       title: 'fix: use bundled devtools frontend URL for remote debugging',
       repo: 'electron/electron',
