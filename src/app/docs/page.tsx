@@ -13,25 +13,39 @@ export const metadata = {
 export default function DocsHubPage() {
   const documentedProjects = [
     {
-      name: 'Meta Pilot',
+      name: 'Cartera Financial OS',
+      slug: 'cartera',
+      firstDoc: 'getting-started',
+      repoUrl: 'https://github.com/omghante/cartera',
+      description: 'Event-driven financial microservices OS with Java 21, Spring Boot, Flutter, Kafka, and double-entry ledger bookkeeping.',
+    },
+    {
+      name: 'MetaPilot',
       slug: 'metapilot',
       firstDoc: 'portal-readme',
       repoUrl: 'https://github.com/omghante/metapilot',
-      description: 'Enterprise Meta Graph API microservices integration engine (98 Documentation Pages Across 13 Categories).',
+      description: 'Multi-tenant WhatsApp marketing & CRM automation platform with Django 5, Celery, Channels WebSockets, and OpenRouter AI.',
     },
     {
-      name: 'Git Context',
+      name: 'Patch.ai',
+      slug: 'patch-ai',
+      firstDoc: 'getting-started',
+      repoUrl: 'https://github.com/omghante/patch.ai',
+      description: 'Autonomous software self-healing AI engine using PyTorch GNNs for stack trace Root Cause Analysis and patch generation.',
+    },
+    {
+      name: 'Reecall.ai',
+      slug: 'reecall-ai',
+      firstDoc: 'getting-started',
+      repoUrl: 'https://github.com/omghante/reecall.ai',
+      description: 'Neural Repository Memory Engine training GNN file embeddings for semantic repository context retrieval without hallucination.',
+    },
+    {
+      name: 'git-context',
       slug: 'git-context',
       firstDoc: 'getting-started',
-      repoUrl: 'https://github.com/om-ghante/git-context',
-      description: 'CLI context parser for assembling codebase prompts for AI agents.',
-    },
-    {
-      name: 'Prismas ERP',
-      slug: 'prismas-erp',
-      firstDoc: 'getting-started',
-      repoUrl: 'https://github.com/om-ghante/prismas-erp',
-      description: 'Multi-tenant Enterprise Resource Planning system architectural overview.',
+      repoUrl: 'https://github.com/omghante/git-context.npmpkg',
+      description: 'Secure Node.js CLI tool (lexa) for multi-account GitHub/GitLab management, credential-embedded cloning, and encrypted cloud sync.',
     },
   ];
 

@@ -91,13 +91,13 @@ export default function Header() {
           <div className="flex items-center gap-2.5">
             <span className="text-zinc-600 font-bold">•</span>
             <span className="bg-zinc-800 text-zinc-200 text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold uppercase tracking-wider">
-              NEW
+              FOCUS
             </span>
             <span className="text-zinc-200">
-              Paper Ecosystem: Autonomous Agentic AI Platform & Architecture Docs
+              Currently working on ScheduleSomething and LayerdEvents algorithms
             </span>
             <Link
-              href="/projects/paper"
+              href="/projects"
               className="text-white hover:underline flex items-center gap-1 font-medium pl-1"
             >
               Learn More <ArrowRight className="h-3 w-3" />
@@ -107,13 +107,13 @@ export default function Header() {
           <div className="flex items-center gap-2.5">
             <span className="text-zinc-600 font-bold">•</span>
             <span className="bg-zinc-800 text-zinc-200 text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold uppercase tracking-wider">
-              NEW
+              FOCUS
             </span>
             <span className="text-zinc-200">
-              Paper Ecosystem: Autonomous Agentic AI Platform & Architecture Docs
+              Currently working on ScheduleSomething and LayerdEvents algorithms
             </span>
             <Link
-              href="/projects/paper"
+              href="/projects"
               className="text-white hover:underline flex items-center gap-1 font-medium pl-1"
             >
               Learn More <ArrowRight className="h-3 w-3" />
@@ -123,13 +123,13 @@ export default function Header() {
           <div className="flex items-center gap-2.5">
             <span className="text-zinc-600 font-bold">•</span>
             <span className="bg-zinc-800 text-zinc-200 text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold uppercase tracking-wider">
-              NEW
+              FOCUS
             </span>
             <span className="text-zinc-200">
-              Paper Ecosystem: Autonomous Agentic AI Platform & Architecture Docs
+              Currently working on ScheduleSomething and LayerdEvents algorithms
             </span>
             <Link
-              href="/projects/paper"
+              href="/projects"
               className="text-white hover:underline flex items-center gap-1 font-medium pl-1"
             >
               Learn More <ArrowRight className="h-3 w-3" />
@@ -139,13 +139,13 @@ export default function Header() {
           <div className="flex items-center gap-2.5">
             <span className="text-zinc-600 font-bold">•</span>
             <span className="bg-zinc-800 text-zinc-200 text-[10px] px-2 py-0.5 rounded-full font-mono font-semibold uppercase tracking-wider">
-              NEW
+              FOCUS
             </span>
             <span className="text-zinc-200">
-              Paper Ecosystem: Autonomous Agentic AI Platform & Architecture Docs
+              Currently working on ScheduleSomething and LayerdEvents algorithms
             </span>
             <Link
-              href="/projects/paper"
+              href="/projects"
               className="text-white hover:underline flex items-center gap-1 font-medium pl-1"
             >
               Learn More <ArrowRight className="h-3 w-3" />

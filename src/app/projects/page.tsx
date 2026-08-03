@@ -15,11 +15,11 @@ export default async function ProjectsPage() {
   const projects = await getProjects();
 
   const mainProjects = projects.filter((p) =>
-    ['cartera', 'metapilot', 'paper', 'reecall-ai', 'tide-os'].includes(p.slug)
+    ['cartera', 'metapilot', 'patch-ai', 'paper', 'reecall-ai', 'tide-os'].includes(p.slug)
   );
 
   const algorithms = projects.filter((p) =>
-    ['cascade-algorithm', 'cortex-algorithm'].includes(p.slug)
+    ['cascade-algorithm', 'cortex-algorithm', 'rapid-algorithm', 'reflux-algorithm', 'rollbackx-algorithm'].includes(p.slug)
   );
 
   const npmPackages = projects.filter((p) =>

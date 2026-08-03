@@ -265,7 +265,7 @@ export default async function HomePage() {
                 <Terminal className="h-4 w-4 text-navy-900" /> Developer Productivity
               </div>
               <p className="text-zinc-600">
-                Creating CLI tools like `git-context` to streamline developer workflows and enhance AI prompt engineering payload assembly.
+                Creating CLI tools like `git-context` (`lexa`) to streamline multi-account Git identity management and per-folder credential isolation.
               </p>
             </div>
           </div>

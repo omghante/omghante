@@ -309,7 +309,7 @@ export async function getGitHubDocs(projectName: string): Promise<GitHubDoc[]> {
       owner: 'omghante',
       repo: 'cartera',
       docs: [
-        { slug: 'getting-started', title: 'System Specs & Wallet Infrastructure', category: 'Getting Started', file: 'README.md', order: 1 },
+        { slug: 'getting-started', title: 'System Specs & Financial Microservices', category: 'Getting Started', file: 'README.md', order: 1 },
       ],
     },
     'metapilot': {
@@ -322,6 +322,20 @@ export async function getGitHubDocs(projectName: string): Promise<GitHubDoc[]> {
       repo: 'metapilot',
       docs: metaPilotDocs,
     },
+    'patch-ai': {
+      owner: 'omghante',
+      repo: 'patch.ai',
+      docs: [
+        { slug: 'getting-started', title: 'Autonomous Self-Healing AI Engine Specs', category: 'Getting Started', file: 'README.md', order: 1 },
+      ],
+    },
+    'patchai': {
+      owner: 'omghante',
+      repo: 'patch.ai',
+      docs: [
+        { slug: 'getting-started', title: 'Autonomous Self-Healing AI Engine Specs', category: 'Getting Started', file: 'README.md', order: 1 },
+      ],
+    },
     'paper': {
       owner: 'artificialpaper',
       repo: 'paper-core',
@@ -333,7 +347,14 @@ export async function getGitHubDocs(projectName: string): Promise<GitHubDoc[]> {
       owner: 'omghante',
       repo: 'reecall.ai',
       docs: [
-        { slug: 'getting-started', title: 'Voice AI & Semantic RAG Specs', category: 'Getting Started', file: 'README.md', order: 1 },
+        { slug: 'getting-started', title: 'Neural Repository Memory Engine Specs', category: 'Getting Started', file: 'README.md', order: 1 },
+      ],
+    },
+    'reecallai': {
+      owner: 'omghante',
+      repo: 'reecall.ai',
+      docs: [
+        { slug: 'getting-started', title: 'Neural Repository Memory Engine Specs', category: 'Getting Started', file: 'README.md', order: 1 },
       ],
     },
     'tide-os': {
@@ -345,9 +366,9 @@ export async function getGitHubDocs(projectName: string): Promise<GitHubDoc[]> {
     },
     'git-context': {
       owner: 'omghante',
-      repo: 'git-context',
+      repo: 'git-context.npmpkg',
       docs: [
-        { slug: 'getting-started', title: 'CLI Usage & Setup', category: 'Getting Started', file: 'README.md', order: 1 },
+        { slug: 'getting-started', title: 'CLI Usage & Multi-Account Setup', category: 'Getting Started', file: 'README.md', order: 1 },
       ],
     },
   };
