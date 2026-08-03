@@ -3,6 +3,9 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 import MermaidDiagram from './MermaidDiagram';
 
 interface MarkdownRendererProps {
@@ -10,11 +13,22 @@ interface MarkdownRendererProps {
   className?: string;
 }
 
+function preprocessMarkdown(content: string): string {
+  if (!content) return '';
+  // Ensure $$ block math delimiters have newlines before \begin and after \end
+  let res = content.replace(/\$\$(\s*\\begin)/g, "$$\n$1");
+  res = res.replace(/(\\end\{[^}]+\})\s*\$\$/g, "$1\n$$");
+  return res;
+}
+
 export default function MarkdownRenderer({ content, className = '' }: MarkdownRendererProps) {
+  const processedContent = preprocessMarkdown(content);
+
   return (
     <div className={`prose prose-zinc max-w-none text-zinc-800 leading-relaxed ${className}`}>
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
         components={{
           code({ node, inline, className, children, ...props }: any) {
             const match = /language-(\w+)/.exec(className || '');
@@ -54,9 +68,9 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
           },
           p({ children, ...props }: any) {
             return (
-              <div className="my-4 leading-relaxed text-zinc-800" {...props}>
+              <p className="my-4 leading-relaxed text-zinc-800" {...props}>
                 {children}
-              </div>
+              </p>
             );
           },
           pre({ children }: any) {
@@ -171,7 +185,7 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
           },
         }}
       >
-        {content}
+        {processedContent}
       </ReactMarkdown>
     </div>
   );
