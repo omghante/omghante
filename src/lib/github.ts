@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import { GitHubBlog, GitHubDoc, GitHubContribution } from '@/types';
 
 const GITHUB_USERNAME = 'omghante';
@@ -12,6 +14,19 @@ export async function fetchGitHubMarkdown(
   branch: string = 'main'
 ): Promise<string> {
   try {
+    const localBasePath = `/run/media/omghante/storage/Github@omghante/${repo}`;
+    const localFilePath = path.join(localBasePath, filePath);
+    if (fs.existsSync(localFilePath)) {
+      try {
+        const localText = fs.readFileSync(localFilePath, 'utf8');
+        if (localText && localText.trim().length > 0) {
+          return localText;
+        }
+      } catch {
+        // Fallback to fetch
+      }
+    }
+
     const encodedFilePath = filePath.split('/').map(encodeURIComponent).join('/');
     const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${encodedFilePath}`;
     const controller = new AbortController();
@@ -38,10 +53,70 @@ export async function fetchGitHubMarkdown(
 }
 
 /**
- * Dynamically fetches list of blogs linked exclusively to the 3 specified .md files from omghante/easy-blogs.
+ * Dynamically fetches list of blogs linked to markdown files in omghante/easy-blogs.
  */
 export async function getGitHubBlogs(): Promise<GitHubBlog[]> {
   const blogSources = [
+    {
+      slug: 'amazons-scot-and-my-cascade',
+      title: "Amazon's SCOT and my CASCADE: Causal Adaptive Scored Conflict-Free Reconciliation",
+      summary: 'How a single 4-step adaptive merge pipeline handles concurrent inventory deltas, multi-region partitions, and trust-scored conflict resolution across e-commerce, offline POS, and fintech ledger architectures.',
+      publishedDate: '2026-04-05',
+      readingTime: '12 min read',
+      tags: ['DistributedSystems', 'CASCADE', 'Consensus', 'InventoryReconciliation'],
+      author: 'Om Ghante',
+      repo: 'easy-blogs',
+      owner: 'omghante',
+      file: "Amazon's SCOT and my CASCADE/cascading_inventory_reconciliation.md",
+    },
+    {
+      slug: 'amazons-scot-and-my-cortex',
+      title: "Amazon's Outages and my CORTEX: Unifying 5 Signals to Prevent Retry Storms",
+      summary: 'Why traditional exponential backoff and independent circuit breakers fail under pressure, and how computing a single Composite Pressure Score (CPS) stops cascading failure loops across microservices.',
+      publishedDate: '2026-04-03',
+      readingTime: '11 min read',
+      tags: ['Microservices', 'CORTEX', 'Resilience', 'RetryStorms'],
+      author: 'Om Ghante',
+      repo: 'easy-blogs',
+      owner: 'omghante',
+      file: "Amazon's SCOT and my CORTEX/adaptive_retry_storm_prevention.md",
+    },
+    {
+      slug: 'amazons-scot-and-my-rapid',
+      title: "Amazon's SCOT and my RAPID: Sub-15ms Multi-Objective Constraint Propagation",
+      summary: 'How to solve NP-hard combinatorial order routing, fulfillment allocation, and multi-resource distribution in sub-15ms without expensive commercial LP solvers.',
+      publishedDate: '2026-04-01',
+      readingTime: '10 min read',
+      tags: ['Algorithms', 'RAPID', 'CombinatorialOptimization', 'OrderRouting'],
+      author: 'Om Ghante',
+      repo: 'easy-blogs',
+      owner: 'omghante',
+      file: "Amazon's SCOT and my RAPID/realtime_constraint_propagation_fulfillment.md",
+    },
+    {
+      slug: 'deployment-safety-and-my-rollbackx',
+      title: 'Zero-Downtime Resilience: Health-Aware Rollouts & Automated Rollbacks with ROLLBACKX',
+      summary: 'How dependency graph topology, BFS blast radius analysis, and real-time canary health scoring eliminate silent deployment outages across complex microservice architectures.',
+      publishedDate: '2026-03-28',
+      readingTime: '9 min read',
+      tags: ['DevOps', 'ROLLBACKX', 'DeploymentSafety', 'Microservices'],
+      author: 'Om Ghante',
+      repo: 'easy-blogs',
+      owner: 'omghante',
+      file: 'Deployment Safety and my ROLLBACKX/health_aware_deployment_orchestration.md',
+    },
+    {
+      slug: 'event-replay-and-my-reflux',
+      title: 'Rethinking Event Sourcing: Selective State Recovery with REFLUX',
+      summary: 'Why replaying every single historical event after a crash is a massive waste of compute, and how dependency-aware dead-write elimination achieves 40%-70% recovery speedups with provable state correctness.',
+      publishedDate: '2026-03-25',
+      readingTime: '9 min read',
+      tags: ['EventSourcing', 'REFLUX', 'StateRecovery', 'DistributedSystems'],
+      author: 'Om Ghante',
+      repo: 'easy-blogs',
+      owner: 'omghante',
+      file: 'Event Replay and my REFLUX/selective_state_recovery_engine.md',
+    },
     {
       slug: 'whatsapp-template-creation-approval-automation',
       title: 'WhatsApp Template Creation & Approval Automation System',
