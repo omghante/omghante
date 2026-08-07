@@ -14,18 +14,24 @@ export async function fetchGitHubMarkdown(
   branch: string = 'main'
 ): Promise<string> {
   try {
-    const localBasePath = `/run/media/omghante/storage/Github@omghante/${repo}`;
-    const localFilePath = path.join(localBasePath, filePath);
-    if (fs.existsSync(localFilePath)) {
-      try {
-        const localText = fs.readFileSync(localFilePath, 'utf8');
-        if (localText && localText.trim().length > 0) {
-          return localText;
+    const localPaths = [
+      path.join(`/run/media/omghante/storage/Github@omghante/${repo}`, filePath),
+      path.join(`/run/media/omghante/storage/Github@omghante/@ai-models/${repo}`, filePath),
+    ];
+
+    for (const localFilePath of localPaths) {
+      if (fs.existsSync(localFilePath)) {
+        try {
+          const localText = fs.readFileSync(localFilePath, 'utf8');
+          if (localText && localText.trim().length > 0) {
+            return localText;
+          }
+        } catch {
+          // Fallback
         }
-      } catch {
-        // Fallback to fetch
       }
     }
+
 
     const encodedFilePath = filePath.split('/').map(encodeURIComponent).join('/');
     const rawUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${encodedFilePath}`;

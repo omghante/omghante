@@ -7,11 +7,14 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import Badge from '@/components/ui/Badge';
 import MarkdownRenderer from '@/components/ui/MarkdownRenderer';
+import ReecallBenchmark from '@/components/ui/ReecallBenchmark';
 import { ArrowLeft, ExternalLink, Github, BookOpen, Layers, Cpu } from 'lucide-react';
+
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
+
 
 export async function generateStaticParams() {
   const projects = await getProjects();
@@ -42,7 +45,8 @@ export default async function ProjectDetailPage(props: Props) {
     <div className="min-h-screen bg-white text-zinc-950 flex flex-col font-sans antialiased">
       <Header />
 
-      <main className="flex-1 mx-auto w-full max-w-4xl px-6 py-12 space-y-12">
+      <main className="flex-1 mx-auto w-full max-w-5xl px-6 py-12 space-y-12">
+
         {/* BACK LINK */}
         <div>
           <Link
@@ -142,7 +146,15 @@ export default async function ProjectDetailPage(props: Props) {
           </div>
         </section>
 
+        {/* AI MODEL BENCHMARKS — only for reecall-ai */}
+        {params.slug === 'reecall-ai' && (
+          <section className="pt-6 border-t border-zinc-200">
+            <ReecallBenchmark />
+          </section>
+        )}
+
         {/* LIVE GITHUB README DOCUMENTATION */}
+
         {readmeDoc && (
           <section className="space-y-6 pt-6 border-t border-zinc-200">
             <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
